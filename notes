@@ -1,0 +1,256 @@
+Tasks
+    
+    
+Make a form component
+    Have input
+    Have button
+        Have event happen
+
+
+
+
+The event component
+    register a value for the note 
+        add the value to an array
+        set up a holder component
+
+holder component
+    add the note
+
+Have not components
+    The note itself
+    Delete the component
+
+There needs to be an array for the notes
+    create a note
+    delete a note
+
+
+    make sure to set tup the event well 
+
+
+I tried to have the form and the event be in different places. 
+They need to be together, or else nothing will trigger. likely related to all of the button being one compenent, and the event by itself not being a component
+
+
+Next I need to add a note. figure out appending, look at state
+
+  const [count, setCount] = useState(0)
+
+
+11/19
+
+why use state as opposed to normal variables
+    the local variables wont remain inbetween screen renders
+
+    const [index, setIndex] = useState(0);
+
+index is a state varriable and sexIndex thesetter function
+
+function handleClick() {
+  setIndex(index + 1);
+}
+
+
+hooks are usestate or anything else starting with use
+    ibky available while react is rendering. allow to "hook" into different features of react
+    only usable on top level of compnents or own hooks
+    
+so...with notes...
+
+
+I need to have an array wheneevr the notes are created, modified or destroyed
+    id=0, id=1
+    creating one would append the list at the end 
+    deestroying one...it would need to delete that note AND reduce the value of all subsequent ones by 1
+
+I need a way to have these values translate visually
+
+notes(
+    id{something}
+)
+
+something like that
+
+
+Need to figure out how to set up transition of data
+
+
+const [index, setIndex] = useState(0);
+
+
+
+const Human1 = {
+  name: "Man Person",
+  age: "526",
+  occupation: "Human Worker"
+}
+
+
+ {Human1.name} 
+ {Human1.age} 
+ {Human1.occupation} 
+
+
+ the state is the notelist component
+    it starts at 0
+    every addition will add 1 to the index and 1 to the total.
+    subtractions will do the same
+
+
+
+    return
+const note = {
+    id= index?,
+    content= "textareavariable"
+
+}
+
+
+how do i transfer te data in react?
+
+
+11/19
+
+Props
+    they are like attributes for your components
+
+step1: declare what you want in the children
+
+    export default function Profile() {
+        return (
+          <Avatar
+            person={{ name: 'Lin Lanying', imageId: '1bX5QH6' }}
+            size={100}
+          />
+        );
+      }
+
+step2: declare what kind you want in the component declaration
+
+function Avatar({ person, size }) {
+    // person and size are available here
+  }
+
+
+  11/20
+
+  Return the child in the parent
+    notebook
+        note
+    
+
+parent will hve a function and trigger button
+   
+ notebook
+    note
+    addnotefunction
+    button(addnote)
+
+
+have props set up so the child knows what it will recieve from the parent
+parentToChild is the prop
+<Child parentToChild={data}/>
+
+
+the data will be set up by the form
+
+
+
+NOW there are two options
+functional component
+    everything is set up in 1 function
+
+export default function Child({parentToChild}) {
+    return (
+        <div>
+            {parentToChild}
+        </div>
+    )
+}
+
+
+
+Class component
+    there are classes set up for everything
+
+export default class Child extends Component {
+    render() {
+        return (
+            <div>
+                {this.props.parentToChild}
+            </div>
+        )
+    }
+}
+
+The child will display the parenttochild prop(the form data)
+
+Make sure all of the functions you want to take place in the parent are literally in the parent
+
+have declaration before the return. dont want to return a const
+    export
+    function Notebook(){
+        const [Notenumber, setNotenumber] = useState(0);
+        const Notecreate = () => {
+          setData("This is the note from the notebook to the note"
+          //id = setNotenumber += 1;
+          )}
+          
+      
+      return(
+
+      
+next time: make sure how to properly set up the props in the function. getting error 
+    Uncaught ReferenceError: SetNotenumber is not defined
+
+11/21
+
+syntax error. Added console.log. didnt show up, but no error. 
+
+Got it to run. It printed "Did it work" twice. Maybe figure out more about testing to know WHY
+
+11/23
+
+react will typically double run everything using something called strict mode as a way to check for bugs
+    react tools 
+
+just try to better understandusestate
+
+11/24
+
+Componenets are organized pieces of code that can be easilyt replicated.
+
+State is the condition your component is in. It allows components to "remember" things.  
+
+Hooks are ways to use different features from your components. 
+    ex state hooks, references, syncing to outside systems
+
+Props are the mechanism for componenets to comunicate to each other
+    they are the way to pass info from parent componenet to child component
+
+
+components are towns
+states are what goods they have or want
+hooks are an order of how they wants something new
+props are the actual infastructure on how to get it
+
+
+For state
+
+const [Notenumber, setNotenumber] = useState(0);
+    Notenumber is a value that contains the updated state
+    setNotenumber is a function that describes how to update it
+
+I tried onclick(setnotenumber), nothing ran.
+I tried it instead with () => setNotenumber(Notenumber + 1) and got an answer
+I think an issue is that setNotenumber isnt a component itself but rather a function that is part of another component
+    I need to split it off to pertly work 
+
+11/25
+
+Bade a BIG misinterpretation. In the onclick function, DO NOT put the set...part of use state in there. instead, declare ANOTHER function in there.
+    Run that NEW name, and declare the setstate in there. 
+
+I noticed in the console.log the numbers go from 0 ->click 1 and then 0 at the end. 
+I think that the last part is becasue of the way I run app.js at the end, which I need to rerun to work
