@@ -1,65 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-
-
-
-
-
-
-
-
-function Notebook(){
-  let [Notenumber, setNotenumber] = useState(0);
-console.log(Notenumber)
- let Increaseamount = () => {
-  setNotenumber( Notenumber+= 1) 
-  console.log(setNotenumber)
-  console.log(Notenumber)
-  }
-    
-
-return(
-<><form>
-<div>Add a note</div>
-    <textarea></textarea>
-    <button onClick = {Increaseamount}
-      >Submit</button>
-
-</form>
-
-
-
-
-
-<IndividualNote />
-</>
-)
-
-
-}
-
-function IndividualNote(data){
-  return(
-    <div>
-
-
-    </div>
-  )
-}
-
-
-
-
+import { useState } from "react";
+import { createRoot } from 'react-dom/client';
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
 function App() {
-return(
-<>
-<Notebook />
-</>
-)
+  const [Indexnumber, setIndexnumber] = useState(0);
+  const [Notecontent, setNotecontent] = useState('');
+  const [Notelist, setNotelist] = useState([])
+  const container = document.getElementById('form');
+
+ 
+
+  const handleChange = (event) => {
+  setNotecontent(event.target.value);
+  };
+
+
+
+const Notecreate = (e, Notecontent) => {  
+e.preventDefault();
+
+    setIndexnumber((prevIndexnumber) => {
+        const newindex = prevIndexnumber + 1;
+    return prevIndexnumber + newindex;});
+
+
+    setNotelist ((Notecontent) => [ ...Notelist, {id:Indexnumber, name:Notecontent} ],
+    //return Notecontent
+    //console.log(`${Notelist} is the notelist`)
+)}; 
+
+  return (
+    <>
+      {
+        <form onSubmit={Notecreate} id="form">
+          <div>Add a note</div>
+          <label>
+            Add a note
+            <textarea
+              id="text"
+              name="text"
+              value={Notecontent}
+              onChange={handleChange}
+            ></textarea>
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      }
+      
+
+      <IndividualNote />
+    </>
+  );
 }
 
-export default App
+ function IndividualNote(Notecontent) {
+   return <div>{}</div>;
+ }
+
+export default App;
