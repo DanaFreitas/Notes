@@ -505,3 +505,205 @@ I think an issue is having two seperate states update based on one eve4nt
 
 read on https://react.dev/learn/choosing-the-state-structure
 that if im having id and content updated together, they should be on one state. makes sense
+
+need to figure out how to do that AND have the state be an array. can do objects, can do arrays, having trouble wiwth array of objects
+
+
+12/7
+
+I think I do need to have seperate states because id is iterable and the content isnt
+
+At fist I couldnt get object to iterate, wrapper another later of brackets around
+
+The notelist IS generating, just delaying, plus im not sure how to append the ids
+try to find array of objects id updating
+
+https://www.reddit.com/r/reactjs/comments/y9lrdm/how_to_merge_arrays_of_two_states/
+
+useReducer 
+
+setNotelist ((Notelist) => [ ...Notelist, {id: this+1, content:Notecontent} ],
+    setNotelist ((prevNotelist) => [ ...prevNotelist, {id: prevNotelist.length, content:Notecontent} ],
+
+Remember to use prev to do the proper input
+find way to have proper notecontent. check chatygpt
+
+
+returning the html isnt working well
+
+12/8
+
+should probably stop having the note state inside the notecontent
+
+12/9
+
+look at https://www.reddit.com/r/webdev/comments/15jjy17/what_should_appjs_include_in_a_full_stack_app/
+
+try to split code up more in components and hooks folders
+
+I think handlechange is a hook, not a component. need to move
+nvm. need to do more research
+
+BUT I do need to reorganize howw app.js works. I dont THINK it should have EVERYTHING
+
+12/10
+
+Props is something that is passed inside a component and is used by fellow components in the react app. 
+On the contrary state is something that is managed inside the component and something that is prone to changes.
+
+this.state is how state is declared in classes for OOP
+never call hooks inside of a any logic, it should always be on the top level!
+
+remember it needs to be import....from....
+
+Need to get parent to import to children. find way to have props inputted properly
+
+12/11
+
+children componenets have to be rednerable
+componets MUST return JSX
+so having a component to declare a state variable isnt going to be viable because it isnt rendering anything, its just assigning state
+
+functional components are the default composition of 
+
+12/12
+
+so handlechange isnt a component, its a function
+Note should handle everything about the submit event...I think
+
+12/13
+
+deleted handlechange. more sure that the function should just be included elsewhere. 
+no need for onchange...i think.
+
+props 
+
+child(color)Return{
+
+    div color:usercolor     TESTING
+}
+
+
+12/15
+
+onchange and onsubmit are props as they can pass arguments
+ (the input) into functions
+
+ need <note info="text"
+
+app() needs to have a return() too    
+
+
+need to have event for not, but having trouble importing the event itself
+
+
+
+
+
+ need to make array of notes
+ https://refine.dev/blog/react-props/#passing-array-to-react-component
+
+function DisplayUsers(props) {
+  const users = props.users;
+ const users = [
+  {
+    id: 0,
+    name: "Chidume Nnamdi",
+    age: 54,
+  },
+  {
+    id: 1,
+    name: "Karim",
+    age: 24,
+  }
+];
+
+return a map of users to return     
+    <div>user.id</div>
+    <div>user.name</div>
+
+
+check the formsubmit for react18 figure out functions 
+
+use action instead of onsubmit
+
+
+
+controlled forms will store the values in state and always be rerendered when anything is done
+    ex formdata =  usestate name email
+        form
+            name 
+            email
+    harder with forms with varying quantities of vlaues, like tables because of too many states
+
+uncontrolled inputs use normal js for form data
+    browser manages the value
+    rander will run the onsubmit when the event is triggered
+    weakness: less direct access to each value. harder to validate or manipulate values. 
+    use formdata, not useref
+
+12/16
+
+controlled and untrolled have big differences in how they are set up
+
+controlled means that there isnt a need for submit because the rendering handles the submitting
+
+
+
+since uncontrolled is more vanilla, it doesnt use state, instead more normal declarations
+
+
+my code had been an inproper amalgamation of both 
+
+12/17
+
+
+BIG detail. setting the setnotcontent sort of cancels out the "delay" in rendering
+
+mapping elements have a key to  keep track of values
+keys need to be generately independantly, not while rendering. also, an items index in an arry shouldnt be its key. 
+    can use incrmenting counter
+
+figure out how to append the notes. nothings changing.
+
+
+12/18
+
+I feel like I have props better understood wehn in practice. It will feed info down the chain.
+Meed to figure out way how to do that with state
+
+not sure if the notecontent is passing
+
+I noticed that undefined keepas passing, even when I am not submitting a value
+it is also doing it 2x
+
+look up more about props
+
+
+12/19
+
+even when following most basic ideas, unable to make the note component viausalize. maybe its the positioning in the function?
+is there an issue with 2 returns in form.jsx   
+
+12/20
+
+CANT render jsx in the submit event code. only add more in the state ret=rendering
+
+
+12/21
+
+made the note work...in some capacity
+
+need way to continously increase th number of notes using map
+
+having trouble witht he syntax fo the map statement
+    the map statement needs to be declared as a const. however, there is an error when I attempt that. It might be related to 
+the return() statement
+
+12/22
+
+Uncaught TypeError: Legends.map is not a function
+    Legends should be an array but isnt. need to check the type
+
+
+    the key DOESNT have to be numbers. but just having an array wont work
