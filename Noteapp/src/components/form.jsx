@@ -21,12 +21,33 @@ const handleSubmit =  (e) => {
 
 
 
-//note={{Notecontent:Notecontent , Noteid:Noteid}}
 
 }
 
-const Countries = ["Atlantis", "Mu", "Lemuria"]
-const Countryid= [0,1,2]
+//const Countries = ["Atlantis", "Mu", "Lemuria"]
+//const Countryid= [0,1,2]
+
+const Countries = [{
+name:"Atlantis", 
+capital:"AtlantisCity",
+population:"5,000,000",
+id:"0"},
+
+{name:"Mu", 
+capital:"Oink",
+population:"60,000,000",
+id:"1"},
+
+
+
+
+{name:"Lemuria", 
+capital:"Zaboomafoo",
+population:"60,000",
+id:"2"},]
+
+
+
 return (
     <div>
        {
@@ -47,16 +68,19 @@ return (
        }
        
 
+       {/* <Note
+ height={1000}
+ width={1000}
+ Notecontent={Notecontent}
+Noteid={Noteid}
+/> */}
 
 <Note 
-height={1000}
-width={1000}
-//Notecontent={`Note Content: ${Notecontent}`}
-Noteid={`Note ID: ${Noteid}`}
-//Testitem={Notecontent}
-Legends={Countries}
-Countryid={Countryid}
+
+Countries={Countries}
+
 />
+
 
     </div>
 
